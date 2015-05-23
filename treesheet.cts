@@ -14,7 +14,7 @@
  *
  */
 
-@html shaded-usa-map //apps.cloudstitch.io/visualizations/shaded-usa-map/index.html;
+@html shaded-usa-map //apps.cloudstitch.io/visualizations/shaded-usa-map-2/index.html;
 @css relative(map.css);
 @js relative(geometry.js);
 @js relative(d3.min.js);
