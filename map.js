@@ -1,14 +1,12 @@
 function shadedUsaMapWidget_Init(elem, treeName) {
   // Load data
   if (typeof tree == 'undefined') {
-    treeName = 'shadedUsaMapDatasource';
+    treeName = 'sheet';
   }
   if (CTS && CTS.engine && CTS.engine.forrest) {
     try {
       var data = CTS(treeName + "|States!rows").nodes[0].toJson();
       var settings = CTS(treeName + "|Settings!rows").nodes[0].toJson()[0];
-      settings.Width = parseInt(settings.Width);
-      settings.Height = parseInt(settings.Height);
       shadedUsaMapWidget_Draw(elem, data, settings);
     } catch(e) {
       console.log(e);
@@ -39,32 +37,34 @@ function shadedUsaMapWidget_Draw(elem, data, settings) {
   var mapElem = widget.find(".shaded-usa-map-widget-map").first()[0];
 
   var ratio = 1.92;
-  var height = 300;
-  var width = height * ratio;
-  var scaleRatio = 1.9;
 
-  if (settings.Size == 'manual') {
-    width = settings.Width;
-    height = settings.Height;
-  } else {
-    // Figure out the biggest.
-    var boxWidth = widget.width();
-    var boxHeight = widget.height();
+  var height, width, scaleRatio;
+  var boxWidth, boxHeight;
 
-    height = widget.height();
-    width = height * ratio;
+  if (widget.width() == 0) { widget.css("width", "600px")}
+  if (widget.height() == 0) { widget.css("height", "400px")}
 
-    if (width > boxWidth) {
-      width = boxWidth;
-      height = width / ratio;
-    }
+  // Figure out the biggest.
+  boxWidth = widget.width();
+  boxHeight = widget.height();
 
-    // 960w and 500h is the benchmark from the data file.
-    scaleRatio = width / 960.0;
+  height = widget.height();
+  width = height * ratio;
 
-    height = height + 'px';
-    width = width + 'px';
+  if (width > boxWidth) {
+    width = boxWidth;
+    height = width / ratio;
   }
+
+  // 960w and 500h is the benchmark from the data file.
+  scaleRatio = width / 960.0;
+
+  height = height + 'px';
+  width = width + 'px';
+
+  //var height = 300;
+  // width = height * ratio;
+  // var scaleRatio =width / 960.0; // 1.9;
 
   var stateMappings = new Object();
   var values = [];
@@ -91,6 +91,7 @@ function shadedUsaMapWidget_Draw(elem, data, settings) {
     .append("svg")
     .attr("width", width)
     .attr("height", height);
+  console.log('settings', settings);
   var states = svg.append("g")
    .attr("class", "shaded-usa-map-widget-states " + settings.ColorFamily)
    .attr("transform", "scale(" + scaleRatio + ")");
@@ -102,7 +103,7 @@ function shadedUsaMapWidget_Draw(elem, data, settings) {
       .attr("class", quantize);
 }
 
-function shadedUsaMapWidget_PreInit(ctsTarget, ctsSource, ctsRelation) {
+function electoralMapVisualization_PreInit(ctsTarget, ctsSource, ctsRelation) {
   var widgetContainer = ctsTarget.value;
   // Need to wait for all the widget dependencies to load. This should be
   // a standard feature built in.

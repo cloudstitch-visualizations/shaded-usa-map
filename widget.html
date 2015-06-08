@@ -1,0 +1,26 @@
+<html>
+<head>
+<!--  <script src="http://cloudstitch.io/release/cloudstitch-0.9.14.js" app="visualizations/shaded-usa-map"></script> -->
+  <script src="http://localhost:3000/release/cloudstitch-HEAD.js" app="visualizations/shaded-usa-map"></script> 
+  <link type="cloudstitch/gsheet" href="http://cloudstitch.io/visualizations/shaded-usa-map/datasource/shadedUsaMapDatasource" />
+
+  <link rel="stylesheet" href="map.css" />
+  <script src="d3.min.js"></script>
+  <script src="geometry.js"></script>
+  <script src="map.js"></script>
+</head>
+<body>
+  <section id="electoral-map-visualization">
+    <div class="shaded-usa-map-widget">
+      <!-- This is the visible section of the CTS template -->
+      <div class="shaded-usa-map-widget-map"></div>
+    </div>
+  </section>
+
+  <h1>Example</h1>
+  <div data-cts="this :graft #shaded-usa-map;">
+  </div>
+
+f
+</body>
+</html>

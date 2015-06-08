@@ -14,11 +14,11 @@
  *
  */
 
-@html shaded-usa-map //apps.cloudstitch.io/visualizations/shaded-usa-map-2/index.html;
+@html electoral-map-visualization //apps.cloudstitch.io/project-templates/electoral-map-visualization/widget.html;
 @css relative(map.css);
 @js relative(geometry.js);
 @js relative(d3.min.js);
 @js relative(map.js);
-@gsheet shadedUsaMapDatasource http://cloudstitch.io/visualizations/shaded-usa-map/datasource/shadedUsaMapDatasource;
+@gsheet sheet http://cloudstitch.io/project-templates/electoral-map-visualization/datasource/sheet;
 
-body|*[widget="visualizations/shaded-usa-map"] {"after": "shadedUsaMapWidget_PreInit"} :graft shaded-usa-map|#shaded-usa-map;
+body|*[widget="project-templates/electoral-map-visualization"] {"after": "electoralMapVisualization_PreInit"} :graft electoral-map-visualization|#electoral-map-visualization;
